@@ -1,0 +1,50 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: #D4CDC4;
+  font-family: 'Poppins', sans-serif;
+}
+@media(max-width: 600px) {
+  .diverror{
+    position: absolute;
+    top: 17%;
+    left: 5%;
+    width: 350px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .imgerror{
+    position: absolute;
+    background-image: url(../assets/image-durmiendo.png);
+    width: 350px;
+    height: 350px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    top: 10%;
+  }
+  .btnerror{
+    border-radius: 10px;
+    padding: 12px;
+    margin: auto 15px;
+    font-size: 18px;
+    border-style: none;
+    font-family: 'Poppins', sans-serif;
+    background-color: #F2B872;
+  }
+  .infoerror{
+    margin: 225px 10px 0px 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  .messageerror{
+    font-size: 36px;
+    color: #80A6A2;
+  }
+}
