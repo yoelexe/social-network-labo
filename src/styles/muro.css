@@ -59,6 +59,10 @@ main{
   font-weight: 600;
 }
 
+.btn-menu i{
+  font-size: 20px;
+}
+
 header .icon_exit{
   font-size: 20px;
   color: var(--color-marron);
@@ -87,6 +91,7 @@ header .icon_exit i{
   text-align: center;
   justify-content: center;
   box-shadow: 0 5px 10px rgba(0,0,0, 0.3);
+  cursor: pointer;
 }
 
 .open-popup{
@@ -98,6 +103,7 @@ header .icon_exit i{
   height: 50px;
   font-family: 'Poppins', sans-serif;
   background-color: white;
+  cursor: pointer;
 }
 
 .pop-up{
@@ -188,9 +194,7 @@ header .icon_exit i{
   font-weight: 500;
 }
 
-.btn-menu i{
-  font-size: 20px;
-}
+
 
 .detail-post .privacy i:last-child{
   position: relative;
@@ -315,7 +319,7 @@ header .icon_exit i{
 
 /* like */
 .btn-like {
-  background-image: url(../assets/icon/me-gusta.png);
+  background-image: url(../assets/icon/heart-regular-24.png);
   background-color: white;
   margin-top: 5px;
   border: none;

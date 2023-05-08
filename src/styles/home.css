@@ -23,6 +23,28 @@ body{
   align-items: center;
 }
 
+.btn-regresar{
+  position: absolute;
+  border: none;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  top: 15px;
+  left: 0;
+  width: 35px;
+  height: 35px;
+  cursor: pointer;
+  margin: 20px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
+}
+
+.btn-regresar i{
+  font-weight: 700;
+  font-size: 25px;
+}
+
 .imghome, .imgLogin, .imgRegister{
   position: absolute;
   background-image: url(../assets/image-food.png);
@@ -70,6 +92,7 @@ body{
   border-style: none;
   font-family: 'Poppins', sans-serif;
   width: 90%;
+  cursor: pointer;
 }
 
 .buttonemail:hover, .buttongoogle:hover,
@@ -129,6 +152,25 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   width: 200px;
   margin: 10px auto 10px;
   top: 570px;
+}
+
+.efecto-after{
+  cursor: pointer;
+}
+
+.efecto-after::after {
+  content: '';
+  display: block;
+  height: 3px;
+  background: #a56f2c;
+  transform: scale(0,1);
+  transform-origin: center left;
+  transition: transform .5s;
+}
+
+.efecto-after:hover::after {
+  transform: scale(1,1);
+  
 }
 
 /* LOGIN */
@@ -205,18 +247,18 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 .buttonReturn {
-  position: absolute;
-  margin: 8px 8px 0px 8px;
+  position: relative;
+  margin: 8px;
   border-radius: 10px;
   font-size: 18px;
   flex-direction: column;
-  top: 120px;
   padding: 12px;
   width: 90%;
   background: #F2B872;
   align-items: center;
   font-family: 'Poppins', sans-serif;
   border-style: none;
+  cursor: pointer;
 }
 .mensajelogin {
   position: absolute;
@@ -286,18 +328,18 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   padding: 12px 0px 12px 60px;
 }
 .buttonSaveInformation{
-  position: absolute;
-  margin: 8px 8px 0px 8px;
+  position: relative;
+  margin: 8px;
   border-radius: 10px;
   font-size: 18px;
   flex-direction: column;
-  top: 178px;
   padding: 12px;
   width: 90%;
   background: #F2B872;
   align-items: center;
   font-family: 'Poppins', sans-serif;
   border-style: none;
+  cursor: pointer;
 }
 
 
@@ -338,69 +380,6 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     width: 90%;
   }
 
-  .buttonemail{
-    background-color: #F2B872;
-    }
-  
-  .buttonemail, .buttongoogle,
-  .buttontwitter, .buttongithub{
-    border-radius: 10px;
-    padding: 12px;
-    margin: 8px 0px 0px 0px;
-    font-size: 18px;
-    border-style: none;
-    font-family: 'Poppins', sans-serif;
-    width: 90%;
-  }
-
-  .buttonemail:hover, .buttongoogle:hover,
-  .buttontwitter:hover, .buttongithub:hover{
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  }
-
-  .iconemail{
-    position: absolute;
-    top: 8%;
-    left: 9%;
-    background-image: url(../assets/icon_email.png);
-    width: 30px;
-    height: 30px;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  
-  .icongoogle{
-    position: absolute;
-    top: 32%;
-    left: 8%;
-    background-image: url(../assets/icon_google.png);
-    width: 28px;
-    height: 28px;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  
-  .icontwitter{
-    position: absolute;
-    top: 58%;
-    left: 8%;
-    background-image: url(../assets/icon_twitter.png);
-    width: 28px;
-    height: 28px;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
-  
-  .icongithub{
-    position: absolute;
-    top: 82%;
-    left: 8%;
-    background-image: url(../assets/icon_github.png);
-    width: 28px;
-    height: 28px;
-    background-repeat: no-repeat;
-    background-size: contain;
-  }
   .registrarAhora{
     position: absolute;
     display: flex;
@@ -471,6 +450,7 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     align-items: center;
     font-family: 'Poppins', sans-serif;
     border-style: none;
+    cursor: pointer;
   }
   .mensajelogin {
     position: absolute;
@@ -539,19 +519,5 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     background-repeat: no-repeat;
     background-position: 20px center;
     padding: 12px 0px 12px 60px;
-  }
-  .buttonSaveInformation{
-    position: absolute;
-    margin: 8px 8px 0px 8px;
-    border-radius: 10px;
-    font-size: 18px;
-    flex-direction: column;
-    top: 178px;
-    padding: 12px;
-    width: 90%;
-    background: #F2B872;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-    border-style: none;
   }
 }

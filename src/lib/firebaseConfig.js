@@ -43,10 +43,22 @@ const db = getFirestore(app);
 // Conexión a RealTime Database
 export const database = getDatabase(app);
 // Guardar publicación en firestore
+
 export const saveTask = (description) => {
+  let today = new Date();
+  let dd = today.getDate();
+  let mm = today.getMonth() + 1;
+  const yyyy = today.getFullYear();
+  if (dd < 10) {
+    dd = `0${dd}`;
+  }
+  if (mm < 10) {
+    mm = `0${mm}`;
+  }
+  today = `${mm}-${dd}-${yyyy}`;
   addDoc(collection(db, 'post'), {
     description,
-    date: Date.now(),
+    date: today,
     likes: [],
     username: auth.currentUser.email,
   });
@@ -64,21 +76,6 @@ export const deleteTask = (id) => deleteDoc(doc(db, 'post', id));
 export const editTasks = (id) => getDoc(doc(db, 'post', id));
 
 export const updateTask = (id, newDates) => updateDoc(doc(db, 'post', id), newDates);
-
-export const getDate = () => {
-  let today = new Date();
-  let dd = today.getDate();
-  let mm = today.getMonth() + 1;
-  const yyyy = today.getFullYear();
-  if (dd < 10) {
-    dd = `0${dd}`;
-  }
-  if (mm < 10) {
-    mm = `0${mm}`;
-  }
-  today = `${mm}-${dd}-${yyyy}`;
-  console.log(today);
-};
 
 export const addLike = (id) => {
   const currentUser = auth.currentUser;
