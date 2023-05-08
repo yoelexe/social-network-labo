@@ -25786,18 +25786,6 @@ const auth = getAuth(app);
 const db = wh(app);
 getDatabase(app);
 const saveTask = (description) => {
-  uf(sh(db, "post"), {
-    description,
-    date: Date.now(),
-    likes: [],
-    username: auth.currentUser.email
-  });
-};
-const onGetTasks = (callback) => cf(dl(sh(db, "post"), Il("date", "desc")), callback);
-const deleteTask = (id2) => of(rh(db, "post", id2));
-const editTasks = (id2) => Jl(rh(db, "post", id2));
-const updateTask = (id2, newDates) => rf(rh(db, "post", id2), newDates);
-const getDate = () => {
   let today = new Date();
   let dd2 = today.getDate();
   let mm = today.getMonth() + 1;
@@ -25809,8 +25797,17 @@ const getDate = () => {
     mm = `0${mm}`;
   }
   today = `${mm}-${dd2}-${yyyy}`;
-  console.log(today);
+  uf(sh(db, "post"), {
+    description,
+    date: today,
+    likes: [],
+    username: auth.currentUser.email
+  });
 };
+const onGetTasks = (callback) => cf(dl(sh(db, "post"), Il("date", "desc")), callback);
+const deleteTask = (id2) => of(rh(db, "post", id2));
+const editTasks = (id2) => Jl(rh(db, "post", id2));
+const updateTask = (id2, newDates) => rf(rh(db, "post", id2), newDates);
 const addLike = (id2) => {
   const currentUser = auth.currentUser;
   const docRef = rh(db, "post", id2);
@@ -25829,7 +25826,6 @@ const loginConfig = (email, password) => new Promise((resolve, reject) => {
   signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
     const user = userCredential.user;
     resolve({ email: user.email, password: user.password });
-    console.log(userCredential);
   }).catch((error2) => {
     const errorCode = error2.code;
     reject(errorCode);
@@ -25838,44 +25834,32 @@ const loginConfig = (email, password) => new Promise((resolve, reject) => {
 const loginWithGoogle = () => new Promise((resolve, reject) => {
   const provider = new GoogleAuthProvider();
   signInWithPopup(auth, provider).then((result) => {
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    console.log(credential);
-    console.log("sign in with google");
+    const credential = GithubAuthProvider.credentialFromResult(result);
     const user = result.user;
-    resolve({ user });
+    resolve(user, credential);
+  }).catch((error2) => {
+    const errorCode = error2.code;
+    reject(errorCode);
+  });
+});
+const loginWithGithub = () => new Promise((resolve, reject) => {
+  const provider = new GithubAuthProvider();
+  signInWithPopup(auth, provider).then((result) => {
+    const credential = GithubAuthProvider.credentialFromResult(result);
+    const githubUser = result.user;
+    resolve({ credential, githubUser });
   }).catch((error2) => {
     const errorCode = error2.code;
     const errorMessage = error2.message;
     reject(errorCode, errorMessage);
   });
 });
-const loginWithGithub = () => {
-  const provider = new GithubAuthProvider();
-  signInWithPopup(auth, provider).then((result) => {
-    const credential = GithubAuthProvider.credentialFromResult(result);
-    const githubUser = result.user;
-    console.log(githubUser);
-    console.log(credential);
-    console.log("sign in with Github");
-  }).catch((error2) => {
-    const errorCode = error2.code;
-    const errorMessage = error2.message;
-    const email = error2.email;
-    const credentialError = GithubAuthProvider.credentialFromError(error2);
-    console.log(errorCode);
-    console.log(errorMessage);
-    console.log(email);
-    console.log(credentialError);
-  });
-};
 const loginWithTwitter = () => new Promise((resolve, reject) => {
   const provider = new TwitterAuthProvider();
   signInWithPopup(auth, provider).then((result) => {
     const credential = TwitterAuthProvider.credentialFromResult(result);
     const user = result.user;
-    console.log(credential, user);
-    console.log("Sign in with twitter");
-    resolve({ user });
+    resolve({ user, credential });
   }).catch((error2) => {
     console.log("error lors de lauthentification firebase : ", error2);
     console.log("codeError : ", error2.code);
@@ -25945,7 +25929,7 @@ const home = (navigateTo2) => {
   buttontwitter.textContent = "Continuar con Twitter";
   buttongithub.textContent = "Continuar con Github";
   registrarAhora.innerHTML = ` \xBFNo tienes una cuenta?
-  <strong>Reg\xEDstrate ahora</strong>`;
+  <strong class='efecto-after'>Reg\xEDstrate ahora</strong>`;
   registrarAhora.addEventListener("click", () => {
     navigateTo2("/register");
   });
@@ -25986,31 +25970,48 @@ const login = (navigateTo2) => {
   formularioLogin.className = "formularioLogin";
   formularioLogin.innerHTML = "";
   formularioLogin.innerHTML += `
-  <div class="loginDiv"> 
+  <div class="loginDiv">
+  <button class='btn-regresar'><i class='bx bx-chevron-left'></i></button> 
   <div class="imgLogin"> 
    <h2 class="messageLogin">Iniciar Sesi\xF3n</h2>
    </div>
    <form class="credencialesdiv" id="formulario">
     <input type="email" class="loginCorreo" id="loginCorreo" placeholder="Correo Electr\xF3nico" required>
+    <p class='correo-mensaje'></p>
      <input type="password" class="loginContra" id="loginContra" placeholder="Contrase\xF1a" required>
+     <p class='contra-mensaje'></p>
       <button class="buttonReturn" type="submit">Ingresar</button> 
    </form>
    <span class="mensajelogin"> \xBFNo tienes una cuenta?
-   <strong>Reg\xEDstrate ahora</strong></span>
+   <strong class="efecto-after">Reg\xEDstrate ahora</strong></span>
   </div>`;
   const mensajelogin = formularioLogin.querySelector(".mensajelogin");
   mensajelogin.addEventListener("click", () => {
     navigateTo2("/register");
+  });
+  const btnRegresar = formularioLogin.querySelector(".btn-regresar");
+  btnRegresar.addEventListener("click", () => {
+    navigateTo2("/");
   });
   const buttonReturn = formularioLogin.querySelector(".buttonReturn");
   buttonReturn.addEventListener("click", async (e) => {
     e.preventDefault();
     const email = document.getElementById("loginCorreo").value;
     const password = document.getElementById("loginContra").value;
+    const loginCorreo = formularioLogin.querySelector(".loginCorreo");
+    const loginContra = formularioLogin.querySelector(".loginContra");
+    const correoMensaje = formularioLogin.querySelector(".correo-mensaje");
+    const contraMensaje = formularioLogin.querySelector(".contra-mensaje");
     loginConfig(email, password).then(() => {
-      console.log(email, password);
       navigateTo2("/muro");
     }).catch((error2) => {
+      if (loginCorreo.value === "" || loginContra.value === "") {
+        correoMensaje.textContent = "Ingresar correo";
+        correoMensaje.style.color = "red";
+        contraMensaje.textContent = "Ingresar contrase\xF1a";
+        contraMensaje.style.color = "red";
+        loginCorreo.focus();
+      }
       if (error2.code === "auth/user-not-found") {
         alert("no esta registrado");
       }
@@ -26039,34 +26040,44 @@ const register = (navigateTo2) => {
   formularioRegister.innerHTML = "";
   formularioRegister.innerHTML += `
   <div class='registerDiv'> 
+  <button class='btn-regresar'><i class='bx bx-chevron-left'></i></button>
    <div class='imgRegister'> 
     <h2 class='menssageRegisterRouter'>Reg\xEDstrate</h2>
    </div>
     <form class='infoRegister' id='formulario'>
       <input type='email' class='emailRegister' id='emailregister' placeholder='Iniciar sesi\xF3n' required> 
+      <p class='correo-mensaje'></p>
         <input type='password' class='passwordRegister' id='passwordregister' placeholder='Contrase\xF1a' required>
-          <input type='password' class='checkPasswordRegister' id= 'checkPasswordRegister' placeholder='Repetir contrase\xF1a' required>
+        <p class='contra-mensaje'></p>
             <button class='buttonSaveInformation' type='submit'>Guardar</button>
     </form>
   </div>`;
+  const btnRegresar = formularioRegister.querySelector(".btn-regresar");
+  btnRegresar.addEventListener("click", () => {
+    navigateTo2("/login");
+  });
   const buttonSaveInformation = formularioRegister.querySelector(".buttonSaveInformation");
   buttonSaveInformation.addEventListener("click", async (e) => {
     e.preventDefault();
     const email = formularioRegister.querySelector("#emailregister").value;
     const password = formularioRegister.querySelector("#passwordregister").value;
+    const correoMensaje = formularioRegister.querySelector(".correo-mensaje");
+    const contraMensaje = formularioRegister.querySelector(".contra-mensaje");
     registerUser(email, password).then(() => {
-      console.log(email, password);
       navigateTo2("/login");
     }).catch((error2) => {
       //! CAMBIAR LOS IF A LA FUNCION
-      if (error2.code === "auth/email-already-in-user") {
-        console.error("correo en uso");
+      if (email === "" || password === "") {
+        correoMensaje.textContent = "Ingresar correo";
+        correoMensaje.style.color = "red";
+        contraMensaje.textContent = "Ingresar contrase\xF1a";
+        contraMensaje.style.color = "red";
+      } else if (error2.code === "auth/email-already-in-user") {
+        correoMensaje.textContent = "Correo en uso";
       } else if (error2.code === "auth/invalid-email") {
-        console.error("correo inv\xE1lido");
+        correoMensaje.textContent = "Correo inv\xE1lido";
       } else if (error2.code === "auth/weak-password") {
-        console.error("contrase\xF1a muy corta");
-      } else {
-        console.error("otro problema", error2.code, error2.message);
+        contraMensaje.textContent = "Contrase\xF1a muy corta";
       }
       return error2;
     });
@@ -26155,7 +26166,7 @@ const muro = (navigateTo2) => {
 
         <div class='dropdown'>
         <button class='btn-menu'><i class='bx bx-dots-horizontal-rounded'></i></button>
-        <p>${task.username}</p>
+        <h3>${task.username.split("@")[0]}</h3>
 
         <div class='container-options'>
         <button class='btn-delete' data-id='${doc.id}'>Eliminar</button>
@@ -26165,22 +26176,20 @@ const muro = (navigateTo2) => {
         </div>
 
         <div class='body-description'>
-        <p class='dateFormat'>Hola</p>
+        <p class='dateFormat'>${task.date}</p>
         <p>${task.description}</p>
         </div>
 
         <div class='reactions'>
-        <button class='btn-like' data-id='${doc.id}' data-liked='${task.likes.includes(auth.currentUser.uid)}'></button> 
+        <button class='btn-like' data-id='${doc.id}' data-liked='${task.likes.includes(auth.currentUser.uid)}'>
+        </button> 
         <span class='count-like'> ${task.likes.length}</span>
         </div>
 
         </div>
           `;
     });
-    const dateTime = getDate();
     tasksContainer.innerHTML = html;
-    const dateFormat = tasksContainer.querySelectorAll(".dateFormat");
-    dateFormat.innerText = dateTime;
     const btnDelete = tasksContainer.querySelectorAll(".btn-delete");
     btnDelete.forEach((btn) => {
       btn.addEventListener("click", (event) => {
