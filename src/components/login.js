@@ -31,7 +31,7 @@ const login = (navigateTo) => {
   });
 
   const buttonReturn = formularioLogin.querySelector('.buttonReturn');
-  buttonReturn.addEventListener('click', async (e) => {
+  buttonReturn.addEventListener('click', (e) => {
     e.preventDefault();
     const email = document.getElementById('loginCorreo').value;
     const password = document.getElementById('loginContra').value;
@@ -44,7 +44,7 @@ const login = (navigateTo) => {
         // console.log(email, password);
         navigateTo('/muro');
       })
-      .catch((error) => {
+      .catch(() => {
         if (loginCorreo.value === '' || loginContra.value === '') {
           correoMensaje.textContent = 'Ingresar correo';
           correoMensaje.style.color = 'red';
@@ -52,17 +52,8 @@ const login = (navigateTo) => {
           contraMensaje.style.color = 'red';
           loginCorreo.focus();
         }
-        if (error.code === 'auth/user-not-found') {
-          alert('no esta registrado');
-        }
-
-        if (error.code === 'auth/wrong-password') {
-          alert('contraseña incorrecta');
-        }
-        return error;
       });
   });
-  formularioLogin.appendChild(mensajelogin);
   return formularioLogin;
 };
 export default login;

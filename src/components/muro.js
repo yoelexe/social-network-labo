@@ -13,7 +13,7 @@ import {
 let editStatus = false;
 let id = '';
 
-const muro = (navigateTo) => {
+function muro(navigateTo) {
   const muroDiv = document.createElement('div');
   muroDiv.className = 'muroDiv';
 
@@ -21,9 +21,8 @@ const muro = (navigateTo) => {
   muroDiv.innerHTML += `
   <header>
   <a class='logo'><i class='bx bx-leaf'></i><span>Food Match</span></a>
-  <button class='icon_exit'><i class='bx bx-exit' ></i></button>
+  <button class='icon_exit' type='button'><i class='bx bx-exit' ></i></button>
   </header>
-
   <main>
   
   <div class='create-post'> 
@@ -62,7 +61,6 @@ const muro = (navigateTo) => {
   // botón salida
   const iconExit = muroDiv.querySelector('.icon_exit');
   iconExit.addEventListener('click', () => {
-    // const auth = getAuth();
     signOut(auth)
       .then(() => {
         navigateTo('/');
@@ -107,7 +105,7 @@ const muro = (navigateTo) => {
       const task = doc.data();
       html += `
         <div class='publicaciones'>
-
+        
         <div class='dropdown'>
         <button class='btn-menu'><i class='bx bx-dots-horizontal-rounded'></i></button>
         <h3>${task.username.split('@')[0]}</h3>
@@ -175,7 +173,6 @@ const muro = (navigateTo) => {
 
     btnLike.forEach((btn) => {
       btn.addEventListener('click', (event) => {
-        // console.log(event.target.dataset);
         if (event.target.dataset.liked === 'false') {
           addLike(event.target.dataset.id);
         } else {
@@ -200,6 +197,6 @@ const muro = (navigateTo) => {
     }
   });
   return muroDiv;
-};
+}
 
 export default muro;

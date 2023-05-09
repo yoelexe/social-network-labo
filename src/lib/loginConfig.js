@@ -7,7 +7,7 @@ import {
   TwitterAuthProvider,
   signInWithPopup,
 } from 'firebase/auth';
-import { auth } from './firebaseConfig.js';
+import { auth } from './firebaseConfig';
 
 // TODO: Función del logueo previamente registrado
 export const loginConfig = (email, password) => new Promise((resolve, reject) => {
@@ -17,9 +17,7 @@ export const loginConfig = (email, password) => new Promise((resolve, reject) =>
       resolve({ email: user.email, password: user.password });
     })
     .catch((error) => {
-      // const errorMessage = error.message;
-      const errorCode = error.code;
-      reject(errorCode);
+      reject(error.code);
     });
 });
 
@@ -45,16 +43,16 @@ export const loginWithGithub = () => new Promise((resolve, reject) => {
     .then((result) => {
       const credential = GithubAuthProvider.credentialFromResult(result);
       const githubUser = result.user;
-      resolve({ credential, githubUser });
-    })
-    .catch((error) => {
+      console.log('sign in with Github', githubUser, credential);
+      resolve(githubUser, credential);
+    }).catch((error) => {
       const errorCode = error.code;
-      const errorMessage = error.message;
-      reject(errorCode, errorMessage);
+      reject(errorCode);
     });
 });
+// TODO: Función de logeo con Twitter
 
-// TODO: Función de logueo con Twitter
+
 export const loginWithTwitter = () => new Promise((resolve, reject) => {
   const provider = new TwitterAuthProvider();
   signInWithPopup(auth, provider)
@@ -62,27 +60,13 @@ export const loginWithTwitter = () => new Promise((resolve, reject) => {
       const credential = TwitterAuthProvider.credentialFromResult(result);
       const user = result.user;
       resolve({ user, credential });
+
     })
     .catch((error) => {
-      console.log('error lors de lauthentification firebase : ', error);
-      console.log('codeError : ', error.code);
-      // error.email is undefined
-      console.log('emailError : ', error.email);
-      console.log('errorMessage : ', error.message);
       const codeError = error.code;
-      console.log(codeError);
+      if (codeError === 'auth/account-exists-with-different-credential') {
+        console.log(codeError);
+      }
       reject(error.code);
     });
 });
-
-// TODO: Cerrar sesión
-/*
-export const signOutSession = () => {
-  signOut(auth).then(() => {
-    alert('Cerrando sesión');
-  }).catch((error) => {
-    const errores = error.code;
-    alert(errores);
-  });
-};
-*/
