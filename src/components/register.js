@@ -61,7 +61,6 @@ const register = (navigateTo) => {
         }
 
         if (expresiones.correo.test(email)) {
-          console.log('El correo es válido');
           correoMensaje.textContent = '';
         } else {
           correoMensaje.textContent = 'Correo inválido';
@@ -69,7 +68,6 @@ const register = (navigateTo) => {
         }
 
         if (expresiones.contra.test(password)) {
-          console.log('Contraseña correcta');
           contraMensaje.textContent = '';
         } else {
           contraMensaje.textContent = 'Contraseña de 6 digitos';
