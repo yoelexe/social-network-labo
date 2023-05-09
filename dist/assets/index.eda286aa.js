@@ -25998,26 +25998,36 @@ const login = (navigateTo2) => {
     e.preventDefault();
     const email = document.getElementById("loginCorreo").value;
     const password = document.getElementById("loginContra").value;
-    const loginCorreo = formularioLogin.querySelector(".loginCorreo");
-    const loginContra = formularioLogin.querySelector(".loginContra");
     const correoMensaje = formularioLogin.querySelector(".correo-mensaje");
     const contraMensaje = formularioLogin.querySelector(".contra-mensaje");
     loginConfig(email, password).then(() => {
       navigateTo2("/muro");
     }).catch((error2) => {
-      if (loginCorreo.value === "") {
+      //! CAMBIAR LOS IF A LA FUNCION
+      const expresiones = {
+        contra: /^.{6,}$/,
+        correo: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
+      };
+      if (email === "") {
         correoMensaje.textContent = "Ingresar correo";
         correoMensaje.style.color = "red";
-        loginCorreo.focus();
-        if (loginContra.value === "") {
+        if (password === "") {
           contraMensaje.textContent = "Ingresar contrase\xF1a";
           contraMensaje.style.color = "red";
         }
       } else {
-        correoMensaje.textContent = "Correo incorrecto";
-        correoMensaje.style.color = "red";
-        contraMensaje.textContent = "Contrase\xF1a incorrecto";
-        contraMensaje.style.color = "red";
+        if (expresiones.correo.test(email)) {
+          correoMensaje.textContent = "";
+        } else {
+          correoMensaje.textContent = "Correo inv\xE1lido";
+          correoMensaje.style.color = "red";
+        }
+        if (expresiones.contra.test(password)) {
+          contraMensaje.textContent = "";
+        } else {
+          contraMensaje.textContent = "Contrase\xF1a de 6 digitos";
+          contraMensaje.style.color = "red";
+        }
       }
       return error2.code;
     });
@@ -26079,18 +26089,19 @@ const register = (navigateTo2) => {
           contraMensaje.textContent = "Ingresar contrase\xF1a";
           contraMensaje.style.color = "red";
         }
-      }
-      if (expresiones.correo.test(email)) {
-        correoMensaje.textContent = "";
       } else {
-        correoMensaje.textContent = "Correo inv\xE1lido";
-        correoMensaje.style.color = "red";
-      }
-      if (expresiones.contra.test(password)) {
-        contraMensaje.textContent = "";
-      } else {
-        contraMensaje.textContent = "Contrase\xF1a de 6 digitos";
-        contraMensaje.style.color = "red";
+        if (expresiones.correo.test(email)) {
+          correoMensaje.textContent = "";
+        } else {
+          correoMensaje.textContent = "Correo inv\xE1lido";
+          correoMensaje.style.color = "red";
+        }
+        if (expresiones.contra.test(password)) {
+          contraMensaje.textContent = "";
+        } else {
+          contraMensaje.textContent = "Contrase\xF1a de 6 digitos";
+          contraMensaje.style.color = "red";
+        }
       }
       return error2;
     });
@@ -26132,7 +26143,7 @@ const muro = (navigateTo2) => {
   </div>
   </div>
   </div>
-  <textarea id='textarea-post' placeholder='Descripci\xF3n del post :D'> </textarea>
+  <textarea id='textarea-post' placeholder='Descripci\xF3n del post'></textarea>
   <button class='publicar-post' type='submit' >Guardar</button>
   </form>
 
@@ -26195,7 +26206,7 @@ const muro = (navigateTo2) => {
         <div class='reactions'>
         <button class='btn-like' data-id='${doc.id}' data-liked='${task.likes.includes(auth.currentUser.uid)}'>
         </button> 
-        <span class='count-like'> ${task.likes.length}</span>
+        <span class='count-like'> ${task.likes.length || ""}</span>
         </div>
 
         </div>
@@ -26205,7 +26216,9 @@ const muro = (navigateTo2) => {
     const btnDelete = tasksContainer.querySelectorAll(".btn-delete");
     btnDelete.forEach((btn) => {
       btn.addEventListener("click", (event) => {
-        deleteTask(event.target.dataset.id);
+        if (window.confirm("\xBFQuieres eliminar la receta?")) {
+          deleteTask(event.target.dataset.id);
+        }
       });
     });
     const btnEdit = tasksContainer.querySelectorAll(".btn-edit");
@@ -26247,6 +26260,7 @@ const muro = (navigateTo2) => {
     const description = formPost["textarea-post"].value;
     if (!editStatus) {
       saveTask(description);
+      formPost.reset();
     } else {
       updateTask(id, { description });
       editStatus = false;
