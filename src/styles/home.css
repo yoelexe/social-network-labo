@@ -100,48 +100,40 @@ body{
 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.iconemail{
+.iconemail, 
+.icongoogle,
+.icontwitter,
+.icongithub
+{
   position: absolute;
+  width: 28px;
+  height: 28px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.iconemail{
   top: 8%;
   left: 9%;
   background-image: url(../assets/icon_email.png);
-  width: 30px;
-  height: 30px;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .icongoogle{
-  position: absolute;
   top: 32%;
   left: 8%;
   background-image: url(../assets/icon_google.png);
-  width: 28px;
-  height: 28px;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .icontwitter{
-  position: absolute;
   top: 58%;
   left: 8%;
   background-image: url(../assets/icon_twitter.png);
-  width: 28px;
-  height: 28px;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .icongithub{
-  position: absolute;
   top: 82%;
   left: 8%;
   background-image: url(../assets/icon_github.png);
-  width: 28px;
-  height: 28px;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .registrarAhora{
@@ -220,30 +212,27 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   width: 350PX;
 }
 
-.loginCorreo {
-  margin: 8px 8px 0px 8px;
+.loginCorreo, .loginContra {
+  margin: 8px;
   border-radius: 10px;
   font-size: 18px;
   width: 90%;
   font-family: 'Poppins', sans-serif;
   border-style: none;
-  background-image:url(../assets/icon_email.png);
-  background-repeat: no-repeat;
-  background-position: 20px center; 
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   padding: 12px 0px 12px 60px;
 }
 
+.loginCorreo{
+  background-image:url(../assets/icon_email.png);
+  background-repeat: no-repeat;
+  background-position: 20px center;
+}
+
 .loginContra {
-  margin: 8px 8px 0px 8px;
-  border-radius: 10px;
-  font-size: 18px;
-  width: 90%;
-  font-family: 'Poppins', sans-serif;
-  border-style: none;
   background-image:url(../assets/icon_password.png);
   background-repeat: no-repeat;
   background-position: 20px center;
-  padding: 12px 0px 12px 60px;
 }
 
 .buttonReturn {
@@ -259,6 +248,7 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   font-family: 'Poppins', sans-serif;
   border-style: none;
   cursor: pointer;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 .mensajelogin {
   position: absolute;
@@ -268,8 +258,7 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   text-align: center;
   width: 100%;
   margin: 10px auto 10px;
-  top: 530px;
-
+  top: 550px;
 }
 
 /* register */
@@ -302,30 +291,24 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   width: 350px;
 }
 
-.emailRegister {
-  margin: 8px 8px 0px 8px;
+.emailRegister, .passwordRegister {
+  margin: 8px;
   border-radius: 10px;
   font-size: 18px;
   width: 90%;
   font-family: 'Poppins', sans-serif;
   border-style: none;
-  background-image:url(../assets/icon_email.png);
-  background-repeat: no-repeat;
-  background-position: 20px center; 
-  padding: 12px 0px 12px 60px;
-  
-}
-.passwordRegister, .checkPasswordRegister{
-  margin: 8px 8px 0px 8px;
-  border-radius: 10px;
-  font-size: 18px;
-  width: 90%;
-  font-family: 'Poppins', sans-serif;
-  border-style: none;
-  background-image:url(../assets/icon_password.png);
   background-repeat: no-repeat;
   background-position: 20px center;
   padding: 12px 0px 12px 60px;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); 
+}
+
+.emailRegister{
+  background-image:url(../assets/icon_email.png);
+}
+.passwordRegister{
+  background-image:url(../assets/icon_password.png);
 }
 .buttonSaveInformation{
   position: relative;
@@ -340,9 +323,8 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   font-family: 'Poppins', sans-serif;
   border-style: none;
   cursor: pointer;
+  box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2); 
 }
-
-
 
 @media(max-width: 480px) {
   
@@ -410,73 +392,6 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     height: auto;
     width: 100%;
   }
-
-  .loginCorreo {
-    margin: 8px 8px 0px 8px;
-    border-radius: 10px;
-    font-size: 18px;
-    width: 90%;
-    font-family: 'Poppins', sans-serif;
-    border-style: none;
-    background-image:url(../assets/icon_email.png);
-    background-repeat: no-repeat;
-    background-position: 20px center; 
-    padding: 12px 0px 12px 60px;
-  }
-
-  .loginContra {
-    margin: 8px 8px 0px 8px;
-    border-radius: 10px;
-    font-size: 18px;
-    width: 90%;
-    font-family: 'Poppins', sans-serif;
-    border-style: none;
-    background-image:url(../assets/icon_password.png);
-    background-repeat: no-repeat;
-    background-position: 20px center;
-    padding: 12px 0px 12px 60px;
-  }
-
-  .buttonReturn {
-    position: absolute;
-    margin: 8px 8px 0px 8px;
-    border-radius: 10px;
-    font-size: 18px;
-    flex-direction: column;
-    top: 120px;
-    padding: 12px;
-    width: 90%;
-    background: #F2B872;
-    align-items: center;
-    font-family: 'Poppins', sans-serif;
-    border-style: none;
-    cursor: pointer;
-  }
-  .mensajelogin {
-    position: absolute;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    margin: 10px auto 10px;
-    top: 530px;
-
-  }
-
-/*Register*/
-  .imgRegister{
-    position: absolute;
-    background-image: url(../assets/image-food.png);
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 200px;
-    width: 200px;
-    top: 60px;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
-  }
   .menssageRegisterRouter{
     top: 200px;
     text-align: center;
@@ -493,31 +408,5 @@ box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
     align-items: center;
     width: 90%;
     
-  }
-  
-  .emailRegister {
-    margin: 8px 8px 0px 8px;
-    border-radius: 10px;
-    font-size: 18px;
-    width: 90%;
-    font-family: 'Poppins', sans-serif;
-    border-style: none;
-    background-image:url(../assets/icon_email.png);
-    background-repeat: no-repeat;
-    background-position: 20px center; 
-    padding: 12px 0px 12px 60px;
-    
-  }
-  .passwordRegister, .checkPasswordRegister{
-    margin: 8px 8px 0px 8px;
-    border-radius: 10px;
-    font-size: 18px;
-    width: 90%;
-    font-family: 'Poppins', sans-serif;
-    border-style: none;
-    background-image:url(../assets/icon_password.png);
-    background-repeat: no-repeat;
-    background-position: 20px center;
-    padding: 12px 0px 12px 60px;
   }
 }

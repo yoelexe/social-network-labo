@@ -73,9 +73,9 @@ const muro = (navigateTo) => {
     const openPopup = muroDiv.querySelector('.open-popup');
     openPopup.addEventListener('click', () => {
       const popUp = muroDiv.querySelector('.pop-up');
-      const button = muroDiv.querySelector('.open-popup');
+      // const button = muroDiv.querySelector('.open-popup');
       const cerrarPost = muroDiv.querySelector('.cerrar-post');
-      button.addEventListener('click', () => {
+      openPopup.addEventListener('click', () => {
         popUp.style.display = 'block';
       });
       cerrarPost.addEventListener('click', () => {

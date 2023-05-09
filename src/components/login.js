@@ -45,21 +45,21 @@ const login = (navigateTo) => {
         navigateTo('/muro');
       })
       .catch((error) => {
-        if (loginCorreo.value === '' || loginContra.value === '') {
+        if (loginCorreo.value === '') {
           correoMensaje.textContent = 'Ingresar correo';
           correoMensaje.style.color = 'red';
-          contraMensaje.textContent = 'Ingresar contraseña';
-          contraMensaje.style.color = 'red';
           loginCorreo.focus();
+          if (loginContra.value === '') {
+            contraMensaje.textContent = 'Ingresar contraseña';
+            contraMensaje.style.color = 'red';
+          }
+        } else {
+          correoMensaje.textContent = 'Correo incorrecto';
+          correoMensaje.style.color = 'red';
+          contraMensaje.textContent = 'Contraseña incorrecto';
+          contraMensaje.style.color = 'red';
         }
-        if (error.code === 'auth/user-not-found') {
-          alert('no esta registrado');
-        }
-
-        if (error.code === 'auth/wrong-password') {
-          alert('contraseña incorrecta');
-        }
-        return error;
+        return error.code;
       });
   });
   formularioLogin.appendChild(mensajelogin);
