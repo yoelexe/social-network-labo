@@ -127,7 +127,7 @@ const muro = (navigateTo) => {
         <div class='reactions'>
         <button class='btn-like' data-id='${doc.id}' data-liked='${task.likes.includes(auth.currentUser.uid)}'>
         </button> 
-        <span class='count-like'> ${task.likes.length}</span>
+        <span class='count-like'> ${task.likes.length || ''}</span>
         </div>
 
         </div>
@@ -142,7 +142,9 @@ const muro = (navigateTo) => {
     const btnDelete = tasksContainer.querySelectorAll('.btn-delete');
     btnDelete.forEach((btn) => {
       btn.addEventListener('click', (event) => {
-        deleteTask(event.target.dataset.id);
+        if (window.confirm('¿Quieres eliminar la receta?')) {
+          deleteTask(event.target.dataset.id);
+        }
       });
     });
 

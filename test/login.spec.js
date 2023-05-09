@@ -31,6 +31,15 @@ describe('login es una funcion', () => {
     botonMensaje.click();
     expect(navigateTo).toHaveBeenCalledWith('/register');
   });
+  it('al dar click  debe llamar a la funcion navigateTo a la ruta "/"', () => {
+    const DOM = document.createElement('div');
+    const navigateTo = jest.fn();
+    document.body.append(DOM);
+    DOM.append(login(navigateTo));
+    const botonMensaje = DOM.querySelector('.btn-regresar');
+    botonMensaje.click();
+    expect(navigateTo).toHaveBeenCalledWith('/');
+  });
   it('al dar click al boton ingresar, nos lleva a la ruta "/muro"', (done) => {
     jest.spyOn(firebaseAuth, 'signInWithEmailAndPassword').mockResolvedValue({ user: 'prueba@prueba.com' });
     const DOM = document.createElement('div');
@@ -77,15 +86,6 @@ describe('verificar que sean funciones', () => {
     const loginWithGoogle = jest.fn();
     expect(typeof loginWithGoogle).toBe('function');
   });
-  // it('validar que el boton de entrar con google', () => {
-  //   const DOM = document.createElement('div');
-  //   document.body.append(DOM);
-  //   const navigateTo = jest.fn();
-  //   DOM.append(home(navigateTo));
-  //   const botonGoogle = DOM.querySelector('.buttongoogle');
-  //   botonGoogle.click();
-  //   expect(navigateTo).toHaveBeenCalledTimes(1);
-  // });
 });
 
 describe('verificar que la funcion sea llamada "google"', () => {

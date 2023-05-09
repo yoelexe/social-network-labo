@@ -26005,20 +26005,21 @@ const login = (navigateTo2) => {
     loginConfig(email, password).then(() => {
       navigateTo2("/muro");
     }).catch((error2) => {
-      if (loginCorreo.value === "" || loginContra.value === "") {
+      if (loginCorreo.value === "") {
         correoMensaje.textContent = "Ingresar correo";
         correoMensaje.style.color = "red";
-        contraMensaje.textContent = "Ingresar contrase\xF1a";
-        contraMensaje.style.color = "red";
         loginCorreo.focus();
+        if (loginContra.value === "") {
+          contraMensaje.textContent = "Ingresar contrase\xF1a";
+          contraMensaje.style.color = "red";
+        }
+      } else {
+        correoMensaje.textContent = "Correo incorrecto";
+        correoMensaje.style.color = "red";
+        contraMensaje.textContent = "Contrase\xF1a incorrecto";
+        contraMensaje.style.color = "red";
       }
-      if (error2.code === "auth/user-not-found") {
-        alert("no esta registrado");
-      }
-      if (error2.code === "auth/wrong-password") {
-        alert("contrase\xF1a incorrecta");
-      }
-      return error2;
+      return error2.code;
     });
   });
   formularioLogin.appendChild(mensajelogin);
@@ -26045,7 +26046,7 @@ const register = (navigateTo2) => {
     <h2 class='menssageRegisterRouter'>Reg\xEDstrate</h2>
    </div>
     <form class='infoRegister' id='formulario'>
-      <input type='email' class='emailRegister' id='emailregister' placeholder='Iniciar sesi\xF3n' required> 
+      <input type='email' class='emailRegister' id='emailregister' placeholder='Correo Electr\xF3nico' required> 
       <p class='correo-mensaje'></p>
         <input type='password' class='passwordRegister' id='passwordregister' placeholder='Contrase\xF1a' required>
         <p class='contra-mensaje'></p>
@@ -26054,7 +26055,7 @@ const register = (navigateTo2) => {
   </div>`;
   const btnRegresar = formularioRegister.querySelector(".btn-regresar");
   btnRegresar.addEventListener("click", () => {
-    navigateTo2("/login");
+    navigateTo2("/");
   });
   const buttonSaveInformation = formularioRegister.querySelector(".buttonSaveInformation");
   buttonSaveInformation.addEventListener("click", async (e) => {
@@ -26067,17 +26068,29 @@ const register = (navigateTo2) => {
       navigateTo2("/login");
     }).catch((error2) => {
       //! CAMBIAR LOS IF A LA FUNCION
-      if (email === "" || password === "") {
+      const expresiones = {
+        contra: /^.{6,}$/,
+        correo: /^[^@]+@[^@]+\.[a-zA-Z]{2,}$/
+      };
+      if (email === "") {
         correoMensaje.textContent = "Ingresar correo";
         correoMensaje.style.color = "red";
-        contraMensaje.textContent = "Ingresar contrase\xF1a";
-        contraMensaje.style.color = "red";
-      } else if (error2.code === "auth/email-already-in-user") {
-        correoMensaje.textContent = "Correo en uso";
-      } else if (error2.code === "auth/invalid-email") {
+        if (password === "") {
+          contraMensaje.textContent = "Ingresar contrase\xF1a";
+          contraMensaje.style.color = "red";
+        }
+      }
+      if (expresiones.correo.test(email)) {
+        correoMensaje.textContent = "";
+      } else {
         correoMensaje.textContent = "Correo inv\xE1lido";
-      } else if (error2.code === "auth/weak-password") {
-        contraMensaje.textContent = "Contrase\xF1a muy corta";
+        correoMensaje.style.color = "red";
+      }
+      if (expresiones.contra.test(password)) {
+        contraMensaje.textContent = "";
+      } else {
+        contraMensaje.textContent = "Contrase\xF1a de 6 digitos";
+        contraMensaje.style.color = "red";
       }
       return error2;
     });
@@ -26140,9 +26153,8 @@ const muro = (navigateTo2) => {
     const openPopup = muroDiv.querySelector(".open-popup");
     openPopup.addEventListener("click", () => {
       const popUp = muroDiv.querySelector(".pop-up");
-      const button = muroDiv.querySelector(".open-popup");
       const cerrarPost = muroDiv.querySelector(".cerrar-post");
-      button.addEventListener("click", () => {
+      openPopup.addEventListener("click", () => {
         popUp.style.display = "block";
       });
       cerrarPost.addEventListener("click", () => {

@@ -36,8 +36,9 @@ describe('Testeando home.js', () => {
   });
   it('al dar click a "Registrar Ahora", llamamos a "navigateTo" una vez', () => {
     const DOM = document.createElement('div');
+    // ? jest.fn() -> mockea la función navigateTo
     const navigateTo = jest.fn();
-    // ? se la pasamos como callback (navigateTo)
+    // ? se la pasamos como callback (navigateTo) y la esta llamando
     DOM.append(home(navigateTo));
     const registrarAhora = DOM.querySelector('.registrarAhora');
     registrarAhora.click();
