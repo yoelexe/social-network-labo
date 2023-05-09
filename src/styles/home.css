@@ -100,48 +100,40 @@ body{
 box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 
-.iconemail{
+.iconemail, 
+.icongoogle,
+.icontwitter,
+.icongithub
+{
   position: absolute;
+  width: 28px;
+  height: 28px;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.iconemail{
   top: 8%;
   left: 9%;
   background-image: url(../assets/icon_email.png);
-  width: 30px;
-  height: 30px;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .icongoogle{
-  position: absolute;
   top: 32%;
   left: 8%;
   background-image: url(../assets/icon_google.png);
-  width: 28px;
-  height: 28px;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .icontwitter{
-  position: absolute;
   top: 58%;
   left: 8%;
   background-image: url(../assets/icon_twitter.png);
-  width: 28px;
-  height: 28px;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .icongithub{
-  position: absolute;
   top: 82%;
   left: 8%;
   background-image: url(../assets/icon_github.png);
-  width: 28px;
-  height: 28px;
-  background-repeat: no-repeat;
-  background-size: contain;
 }
 
 .registrarAhora{
