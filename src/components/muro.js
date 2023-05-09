@@ -47,7 +47,7 @@ const muro = (navigateTo) => {
   </div>
   </div>
   </div>
-  <textarea id='textarea-post' placeholder='Descripción del post :D'> </textarea>
+  <textarea id='textarea-post' placeholder='Descripción del post'></textarea>
   <button class='publicar-post' type='submit' >Guardar</button>
   </form>
 
@@ -196,6 +196,7 @@ const muro = (navigateTo) => {
     // console.log(description);
     if (!editStatus) {
       saveTask(description);
+      formPost.reset();
     } else {
       updateTask(id, { description });
       editStatus = false;

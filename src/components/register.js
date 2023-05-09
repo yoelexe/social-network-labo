@@ -32,10 +32,6 @@ const register = (navigateTo) => {
     e.preventDefault();
     const email = formularioRegister.querySelector('#emailregister').value;
     const password = formularioRegister.querySelector('#passwordregister').value;
-    /* const email = document.getElementsByClassName('emailregister').value;
-    const password = document.getElementsByClassName('passwordregister').value; */
-    // const emailRegister = formularioRegister.querySelector('.emailRegister');
-    // const passwordregister = formularioRegister.querySelector('.passwordregister');
     const correoMensaje = formularioRegister.querySelector('.correo-mensaje');
     const contraMensaje = formularioRegister.querySelector('.contra-mensaje');
     registerUser(email, password)
@@ -58,20 +54,19 @@ const register = (navigateTo) => {
             contraMensaje.textContent = 'Ingresar contraseña';
             contraMensaje.style.color = 'red';
           }
-        }
-
-        if (expresiones.correo.test(email)) {
-          correoMensaje.textContent = '';
         } else {
-          correoMensaje.textContent = 'Correo inválido';
-          correoMensaje.style.color = 'red';
-        }
-
-        if (expresiones.contra.test(password)) {
-          contraMensaje.textContent = '';
-        } else {
-          contraMensaje.textContent = 'Contraseña de 6 digitos';
-          contraMensaje.style.color = 'red';
+          if (expresiones.correo.test(email)) {
+            correoMensaje.textContent = '';
+          } else {
+            correoMensaje.textContent = 'Correo inválido';
+            correoMensaje.style.color = 'red';
+          }
+          if (expresiones.contra.test(password)) {
+            contraMensaje.textContent = '';
+          } else {
+            contraMensaje.textContent = 'Contraseña de 6 digitos';
+            contraMensaje.style.color = 'red';
+          }
         }
         return error;
       });
