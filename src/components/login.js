@@ -31,7 +31,7 @@ const login = (navigateTo) => {
   });
 
   const buttonReturn = formularioLogin.querySelector('.buttonReturn');
-  buttonReturn.addEventListener('click', async (e) => {
+  buttonReturn.addEventListener('click', (e) => {
     e.preventDefault();
     const email = document.getElementById('loginCorreo').value;
     const password = document.getElementById('loginContra').value;
@@ -74,7 +74,6 @@ const login = (navigateTo) => {
         return error.code;
       });
   });
-  formularioLogin.appendChild(mensajelogin);
   return formularioLogin;
 };
 export default login;
