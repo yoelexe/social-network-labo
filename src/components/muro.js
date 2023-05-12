@@ -41,7 +41,8 @@ function muro(navigateTo) {
   
   </div>
   </div>
-  <textarea id='textarea-post' placeholder='Descripción del post'></textarea>
+  <textarea id='textarea-post' placeholder='Descripción del post' required></textarea>
+  <p class='text-area'></p>
   <button class='publicar-post' type='submit' >Guardar</button>
   </form>
 
@@ -56,25 +57,33 @@ function muro(navigateTo) {
   // botón salida
   const iconExit = muroDiv.querySelector('.icon_exit');
   iconExit.addEventListener('click', () => {
-    signOut(auth)
-      .then(() => {
-        navigateTo('/');
-      });
+    signOut(auth).then(() => {
+      navigateTo('/');
+    });
   });
 
   const interacionPopUp = () => {
     const openPopup = muroDiv.querySelector('.open-popup');
     openPopup.addEventListener('click', () => {
       const popUp = muroDiv.querySelector('.pop-up');
-      const textareaPost = muroDiv.querySelector('#textarea-post');
-      // const button = muroDiv.querySelector('.open-popup');
+      const button = muroDiv.querySelector('.open-popup');
       const cerrarPost = muroDiv.querySelector('.cerrar-post');
-      openPopup.addEventListener('click', () => {
+      const publicarPost = muroDiv.querySelector('.publicar-post');
+      const formPost = muroDiv.querySelector('.form-post');
+      button.addEventListener('click', () => {
         popUp.style.display = 'block';
-        textareaPost.value = '';
+        formPost['textarea-post'].value = '';
       });
       cerrarPost.addEventListener('click', () => {
         popUp.style.display = 'none';
+      });
+      publicarPost.addEventListener('click', () => {
+        const result = formPost['textarea-post'].value;
+        if (result === '') {
+          popUp.style.display = 'block';
+        } else {
+          popUp.style.display = 'none';
+        }
       });
       window.addEventListener('click', (e) => {
         if (e.target === popUp) {
@@ -83,7 +92,6 @@ function muro(navigateTo) {
       });
     });
   };
-
   interacionPopUp();
 
   // contenedor publicaciones (mostrar datos)
@@ -149,8 +157,12 @@ function muro(navigateTo) {
       btn.addEventListener('click', async (event) => {
         const cerrarPost = muroDiv.querySelector('.cerrar-post');
         const popUp = muroDiv.querySelector('.pop-up');
+        const publicarPost = muroDiv.querySelector('.publicar-post');
         popUp.style.display = 'block';
         cerrarPost.addEventListener('click', () => {
+          popUp.style.display = 'none';
+        });
+        publicarPost.addEventListener('click', () => {
           popUp.style.display = 'none';
         });
         window.addEventListener('click', (e) => {
@@ -183,16 +195,13 @@ function muro(navigateTo) {
   });
 
   const formPost = muroDiv.querySelector('.form-post');
-  // const publicarPost = muroDiv.querySelector('.publicar-post');
-  // const popUp = muroDiv.querySelector('.pop-up');
   formPost.addEventListener('submit', (e) => {
     e.preventDefault();
     const description = formPost['textarea-post'].value;
-    const textareaPost = muroDiv.querySelector('#textarea-post');
-    // console.log(description);
-    if (!editStatus) {
+    if (description === '') {
+      window.confirm('Debes llenar el espacio del texto');
+    } else if (!editStatus) {
       saveTask(description);
-      textareaPost.value = '';
     } else {
       updateTask(id, { description });
       editStatus = false;

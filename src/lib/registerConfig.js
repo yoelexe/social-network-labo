@@ -12,6 +12,6 @@ export const registerUser = (email, password) => new Promise((resolve, reject) =
     .catch((error) => {
       const errorMessage = error.message;
       const errorCode = error.code;
-      reject(errorMessage, errorCode);
+      reject(errorCode, errorMessage);
     });
 });

@@ -43,7 +43,6 @@ export const loginWithGithub = () => new Promise((resolve, reject) => {
     .then((result) => {
       const credential = GithubAuthProvider.credentialFromResult(result);
       const githubUser = result.user;
-      console.log('sign in with Github', githubUser, credential);
       resolve(githubUser, credential);
     }).catch((error) => {
       const errorCode = error.code;
@@ -52,7 +51,6 @@ export const loginWithGithub = () => new Promise((resolve, reject) => {
 });
 // TODO: Función de logeo con Twitter
 
-
 export const loginWithTwitter = () => new Promise((resolve, reject) => {
   const provider = new TwitterAuthProvider();
   signInWithPopup(auth, provider)
@@ -60,7 +58,6 @@ export const loginWithTwitter = () => new Promise((resolve, reject) => {
       const credential = TwitterAuthProvider.credentialFromResult(result);
       const user = result.user;
       resolve({ user, credential });
-
     })
     .catch((error) => {
       const codeError = error.code;

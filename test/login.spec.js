@@ -101,7 +101,7 @@ describe('verificar que la funcion sea llamada "google"', () => {
   });
   it('Probar login usando google', () => {
     jest.spyOn(loginConfig, 'loginWithGoogle');
-    const GoogleAuthProvider = jest.fn;
+    const GoogleAuthProvider = jest.fn();
     jest.spyOn(firebaseAuth, 'signInWithPopup').mockResolvedValue({ user: 'prueba@prueba.com', GoogleAuthProvider });
     const DOM = document.createElement('div');
     const navigateTo = jest.fn();
