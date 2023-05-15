@@ -108,7 +108,7 @@ header .icon_exit i{
 }
 
 .open-popup:hover{
-  background-color: var(--color-azul);
+  background-color: #e9d1b3;
 }
 
 .pop-up{
@@ -128,6 +128,8 @@ header .icon_exit i{
   font-weight: 600;
   text-align: center;
   padding: 5px 0;
+  background-color: var(--color-naranja);
+  border-radius: 7px;
 }
 .post {
   display: flex;
@@ -140,10 +142,10 @@ header .icon_exit i{
   top: 5%;
   margin: 40px 30px;
   width: 45%;
-  height: 350px;
-  background-color: var(--color-azul);
+  background-color: white;
   border-radius: 7px;
   z-index: 3;
+  padding: 10px;
 }
 
 .post .form-post :where(.content-post, .detail-post .privacy){
@@ -154,33 +156,6 @@ header .icon_exit i{
   
 }
 
-.post .form-post .content-post img{
-  position: relative;
-  max-width: 52px;
-}
-
-.post .form-post .content-post .detail-post{
-  position: relative;
-  margin: 3px 0 0 12px;
-}
-
-.form-post .content-post .detail-post p{
-  position: relative;
-  font-size: 17px;
-  font-weight: 500;
-}
-
-.form-post .content-post .detail-post .privacy{
-  position: relative;
-  max-width: 120px;
-  cursor: pointer;
-  font-size: 11px;
-  margin-top: 3px;
-  padding: 0 10px;
-  border-radius: 5px;
-  background: #e4e6eb;
-  justify-content: space-between; /* buscar otra .form-posta de separar*/
-}
 
 .reactions{
   grid-column: 1 / 3;
@@ -213,14 +188,15 @@ header .icon_exit i{
   width: 100%;
   outline: none;
   font-size: 14px;
-  margin-top: 10px;
+  margin-bottom: 10px;
   min-height: 175px;
   padding: 8px 10px;
   text-align: justify;
+  border-radius: 7px;
 }
 
 .container-options button{
-  background-color: var(--color-azul);
+  background-color: #e9d1b3;
   border: none;
   border-radius: 7px;
   padding: 3px;
@@ -235,19 +211,18 @@ header .icon_exit i{
   position: relative;
   color: black;
   cursor: pointer;
-  background: var(--color-azul);
+  background: var(--color-naranja);
   font-weight: bold;
 }
 
 .cerrar-post{
   position: absolute;
-  top: 11%;
+  top: 12%;
   right: 28%;
   width: 5%;
   border: none;
   z-index: 999;
-  border-radius: 7px;
-  background-color: var(--color-azul);
+  background-color: transparent;
   font-size: 22px;
   cursor: pointer;
 }
@@ -324,14 +299,13 @@ header .icon_exit i{
 
 /* like */
 .btn-like {
-  background-image: url(../assets/icon/heart-regular-24.png);
+  background: url(../assets/icon/heart-regular-24.png);
   background-color: white;
   margin-top: 5px;
   border: none;
   width: 20px;
   height: 20px;
   background-size: contain;
-  left: 0;
   cursor: pointer;
 }
 
@@ -393,50 +367,13 @@ header .icon_exit i{
   }
 
   .post .form-post{
-    position: relative;
-    top: 100px;
-    width: 100%;
+    position: absolute;
+    top: 5%;
     margin: 40px 30px;
-    height: 350px;
-    background-color: var(--color-azul);
+    width: 90%;
     border-radius: 7px;
     z-index: 3;
-  }
-
-  .post .form-post :where(.content-post, .detail-post .privacy){
-    position: relative;
-    display: flex;
-    align-items: center;
-    margin: 10px;
-    
-  }
-
-  .post .form-post .content-post img{
-    position: relative;
-    max-width: 52px;
-  }
-
-  .post .form-post .content-post .detail-post{
-    position: relative;
-    margin: 3px 0 0 12px;
-  }
-
-  .form-post .content-post .detail-post p{
-    position: relative;
-    font-size: 17px;
-    font-weight: 500;
-  }
-
-  .form-post .content-post .detail-post .privacy{
-    position: relative;
-    max-width: 120px;
-    cursor: pointer;
-    font-size: 11px;
-    margin-top: 3px;
-    padding: 0 10px;
-    border-radius: 5px;
-    background: #e4e6eb;
-    justify-content: space-between; /* buscar otra .form-posta de separar*/
+    padding: 10px;
   }
 
   .reactions{
@@ -449,13 +386,6 @@ header .icon_exit i{
     bottom: 5px;
   }
 
-  .detail-post .privacy span{
-    position: relative;
-    font-size: 13px;
-    margin-top: 1px;
-    font-weight: 500;
-  }
-
   .btn-menu i{
     font-size: 20px;
   }
@@ -466,20 +396,8 @@ header .icon_exit i{
     margin-left: 1px;
   }
 
-  .post .form-post textarea{
-    position: relative;
-    resize: none;
-    width: 100%;
-    outline: none;
-    font-size: 14px;
-    margin-top: 10px;
-    min-height: 175px;
-    padding: 8px 10px;
-    text-align: justify;
-  }
-
   .container-options button{
-    background-color: var(--color-azul);
+    background-color: #e9d1b3;
     border: none;
     border-radius: 7px;
     padding: 3px;
@@ -490,26 +408,6 @@ header .icon_exit i{
     font-family: 'Poppins', sans-serif;
   }
 
-  .form-post textarea:valid ~ button{
-    position: relative;
-    color: black;
-    cursor: pointer;
-    background: var(--color-azul);
-    font-weight: bold;
-  }
-
-  .cerrar-post{
-    position: absolute;
-    top: 141px;
-    right: 30px;
-    width: 10%;
-    border: none;
-    z-index: 999;
-    border-radius: 7px;
-    background-color: var(--color-azul);
-    font-size: 22px;
-    cursor: pointer;
-  }
   .container{
     height: 100%;
     width: 100%;
@@ -525,6 +423,14 @@ header .icon_exit i{
     border-radius: 7px;
   }
 
+  .cerrar-post{
+    top: 11%;
+    right: 10%;
+    width: 5%;
+    font-size: 22px;
+    cursor: pointer;
+  }
+
   .btn-menu{
     border: none;
     background-color: white;
@@ -535,26 +441,14 @@ header .icon_exit i{
     z-index: 4;   
   }
 
-  .container-options{
-    display: none;
-    position: absolute;
-    width: 75px;
-    height: 60px;
-    top: 20px;
-    background-color: white;
-    border-radius: 10px;
-  }
-
-  .btn-delete .btn-edit{
-    position: absolute;
-    align-items: center;
-    border: none;
-  }
-
   .dropdown{
     position: relative;
     grid-column: 1 / 3;
     grid-row: 1;
+  }
+
+  .dropdown:hover .container-options{
+    display: block;
   }
 
   .body-description{
@@ -562,19 +456,4 @@ header .icon_exit i{
     grid-row: 2;
   }
   
-  .dropdown:hover .container-options{
-    display: block;
-  }
-
-  /* like */
-  .btn-like {
-    background-image: url(../assets/icon/me-gusta.png);
-    background-color: white;
-    margin-top: 5px;
-    border: none;
-    width: 20px;
-    height: 20px;
-    background-size: contain;
-    left: 0;
-  }
 }

@@ -13,7 +13,7 @@ import {
 let editStatus = false;
 let id = '';
 
-const muro = (navigateTo) => {
+function muro(navigateTo) {
   const muroDiv = document.createElement('div');
   muroDiv.className = 'muroDiv';
 
@@ -21,9 +21,8 @@ const muro = (navigateTo) => {
   muroDiv.innerHTML += `
   <header>
   <a class='logo'><i class='bx bx-leaf'></i><span>Food Match</span></a>
-  <button class='icon_exit'><i class='bx bx-exit' ></i></button>
+  <button class='icon_exit' type='button'><i class='bx bx-exit' ></i></button>
   </header>
-
   <main>
   
   <div class='create-post'> 
@@ -39,12 +38,7 @@ const muro = (navigateTo) => {
   <h2>Crear Post</h2>
   <div class='content-post'>
   <div class='detail-post'>
-  <p>Food Match</p>
-  <div class='privacy'>
-  <i class='bx bx-user-pin' ></i>
-  <span>amigos</span>
-  <i class='bx bx-caret-down'></i>
-  </div>
+  
   </div>
   </div>
   <textarea id='textarea-post' placeholder='Descripción del post'></textarea>
@@ -62,7 +56,6 @@ const muro = (navigateTo) => {
   // botón salida
   const iconExit = muroDiv.querySelector('.icon_exit');
   iconExit.addEventListener('click', () => {
-    // const auth = getAuth();
     signOut(auth)
       .then(() => {
         navigateTo('/');
@@ -73,10 +66,12 @@ const muro = (navigateTo) => {
     const openPopup = muroDiv.querySelector('.open-popup');
     openPopup.addEventListener('click', () => {
       const popUp = muroDiv.querySelector('.pop-up');
+      const textareaPost = muroDiv.querySelector('#textarea-post');
       // const button = muroDiv.querySelector('.open-popup');
       const cerrarPost = muroDiv.querySelector('.cerrar-post');
       openPopup.addEventListener('click', () => {
         popUp.style.display = 'block';
+        textareaPost.value = '';
       });
       cerrarPost.addEventListener('click', () => {
         popUp.style.display = 'none';
@@ -107,11 +102,11 @@ const muro = (navigateTo) => {
       const task = doc.data();
       html += `
         <div class='publicaciones'>
-
+        
         <div class='dropdown'>
+
         <button class='btn-menu'><i class='bx bx-dots-horizontal-rounded'></i></button>
         <h3>${task.username.split('@')[0]}</h3>
-
         <div class='container-options'>
         <button class='btn-delete' data-id='${doc.id}'>Eliminar</button>
         <button class='btn-edit' data-id='${doc.id}'>Editar</button>
@@ -125,6 +120,7 @@ const muro = (navigateTo) => {
         </div>
 
         <div class='reactions'>
+        
         <button class='btn-like' data-id='${doc.id}' data-liked='${task.likes.includes(auth.currentUser.uid)}'>
         </button> 
         <span class='count-like'> ${task.likes.length || ''}</span>
@@ -177,7 +173,6 @@ const muro = (navigateTo) => {
 
     btnLike.forEach((btn) => {
       btn.addEventListener('click', (event) => {
-        // console.log(event.target.dataset);
         if (event.target.dataset.liked === 'false') {
           addLike(event.target.dataset.id);
         } else {
@@ -193,16 +188,17 @@ const muro = (navigateTo) => {
   formPost.addEventListener('submit', (e) => {
     e.preventDefault();
     const description = formPost['textarea-post'].value;
+    const textareaPost = muroDiv.querySelector('#textarea-post');
     // console.log(description);
     if (!editStatus) {
       saveTask(description);
-      formPost.reset();
+      textareaPost.value = '';
     } else {
       updateTask(id, { description });
       editStatus = false;
     }
   });
   return muroDiv;
-};
+}
 
 export default muro;
